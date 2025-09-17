@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Pari 💗</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',sans-serif;overflow:hidden;background:#111;color:#fff;text-align:center;}
+
+  .layer{position:absolute;top:0;left:0;width:100%;height:100%;display:none;justify-content:center;align-items:center;flex-direction:column;padding:20px;}
+  .active{display:flex;}
+
+  /* LAYER 1 : GATE */
+  #layer1{background:linear-gradient(135deg,#ff1493,#000);}
+  h1{font-size:2em;text-shadow:0 0 10px #ff69b4;}
+  .gate-btn{padding:15px 30px;font-size:1.2em;border:none;border-radius:10px;background:#ff1493;color:#fff;cursor:pointer;box-shadow:0 0 15px #ff69b4;margin-top:20px;transition:0.3s;}
+  .gate-btn:hover{transform:scale(1.1);}
+
+  /* LAYER 2 : CAKE */
+  #layer2{background:#f8e6d9;flex-direction:column;color:#222;}
+  .cake{position:relative;width:250px;height:150px;margin:20px auto;}
+  .cake-base{position:absolute;bottom:0;width:100%;height:60px;background:#8b4513;border-radius:0 0 20px 20px;}
+  .cake-cream{position:absolute;bottom:60px;width:100%;height:40px;background:#fff0f5;border-radius:20px;}
+  .candle{position:absolute;bottom:100px;width:10px;height:40px;background:#00ced1;border-radius:3px;}
+  .flame{width:12px;height:12px;background:orange;border-radius:50%;position:absolute;top:-15px;left:-1px;animation:flicker 0.3s infinite alternate;}
+  @keyframes flicker{from{transform:scale(1);opacity:1;}to{transform:scale(1.2);opacity:.7;}}
+
+  /* LAYER 3 : WADA */
+  #layer3{background:linear-gradient(135deg,#222,#ff69b4);padding:20px;}
+  .promise{font-size:1.2em;max-width:600px;line-height:1.6;opacity:0;transition:opacity 1s;margin:10px auto;text-align:center;}
+
+  /* LAYER 4 : FINAL */
+  #layer4{background:linear-gradient(135deg,#000,#ff1493);flex-direction:column;}
+  #finalMsg{font-size:2em;text-shadow:0 0 20px #fff;margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto;}
+  #uploadedPhoto{max-width:250px;border-radius:20px;box-shadow:0 0 20px #ff69b4;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<!-- Background Song -->
+<audio id="bgMusic">
+  <source src="https://www.dropbox.com/scl/fi/d6vg0vy4ocwtuczmw82nm/Dil-Tu-Jaan-Tu-Full-Video-Gurnazar-Ft.-Kritika-Yadav-_-New-Punjabi-Viral-Song-_-Chet-Singh.mp3?rlkey=u66p1n4f7g68wl6vbmvspiqpg&st=3g7bu9jg&raw=1" type="audio/mp3">
+</audio>
+
+<!-- LAYER 1 : GATE -->
+<div id="layer1" class="layer active">
+  <h1>🎁 Welcome Birthday Girl Pari 💗<br>Please Open the Gate</h1>
+  <button class="gate-btn" onclick="openGate()">Open Gate</button>
+</div>
+
+<!-- LAYER 2 : CAKE -->
+<div id="layer2" class="layer">
+  <h2>🎂 Blow the candles Pari 🎂</h2>
+  <div class="cake" id="cake">
+    <div class="cake-base"></div>
+    <div class="cake-cream"></div>
+  </div>
+  <button class="gate-btn" onclick="cutCake()">🎂 Cake Cut Karo 🎂</button>
+</div>
+
+<!-- LAYER 3 : WADA -->
+<div id="layer3" class="layer">
+  <h2>My Wada ❤️</h2>
+  <p id="promise1" class="promise">Happy Birthday My Love PÀRI ❤️</p>
+  <p id="promise2" class="promise">Aaj ke din main tumse ek wada karta hoon…</p>
+  <p id="promise3" class="promise">Chahe kuch bhi ho jaye, main hamesha tumhare saath rahunga.</p>
+  <p id="promise4" class="promise">Tumhari khushi meri khushi hai, tumhari muskaan meri zindagi hai.</p>
+  <p id="promise5" class="promise">Main tumhe hamesha pyaar karunga, protect karunga,<br>aur kabhi tumhe akela mehsoos nahi hone dunga.</p>
+  <p id="promise6" class="promise">🎂 This cake, these candles, aur yeh saari duniya bhi kam hai<br>meri feelings tum tak pohchane ke liye ❤️</p>
+  <p id="promise7" class="promise" style="font-size:1.5em;color:#fff;text-shadow:0 0 10px #000;">Once again… Happy Birthday My Wifey 👑 PÀRI ❤️</p>
+  <button class="gate-btn" onclick="showFinal()">Next Surprise ➡</button>
+</div>
+
+<!-- LAYER 4 : FINAL -->
+<div id="layer4" class="layer">
+  <div id="finalMsg">🎉 Happy Birthday Pari 💗 From Irfuu 🎉</div>
+  <img id="uploadedPhoto" src="https://i.postimg.cc/pVZFccNz/Snapchat-361651586.jpg" alt="Pari">
+</div>
+
+<script>
+  // Switch layers
+  function openGate(){
+    document.getElementById("layer1").classList.remove("active");
+    document.getElementById("layer2").classList.add("active");
+    createCandles();
+
+    // Play music
+    const music = document.getElementById("bgMusic");
+    music.play().catch(()=>{});
+  }
+
+  // Create candles dynamically
+  function createCandles(){
+    const cake = document.getElementById("cake");
+    for(let i=0;i<15;i++){
+      let candle=document.createElement("div");
+      candle.className="candle";
+      candle.style.left=(15*i)+"px";
+      let flame=document.createElement("div");
+      flame.className="flame";
+      candle.appendChild(flame);
+      cake.appendChild(candle);
+    }
+  }
+
+  // Cut cake -> move to promises
+  function cutCake(){
+    document.getElementById("layer2").classList.remove("active");
+    document.getElementById("layer3").classList.add("active");
+    showPromises();
+  }
+
+  // Show promises one by one
+  function showPromises(){
+    const promises=["promise1","promise2","promise3","promise4","promise5","promise6","promise7"];
+    promises.forEach((id,index)=>{
+      setTimeout(()=>document.getElementById(id).style.opacity=1,1500*index);
+    });
+  }
+
+  // Final layer
+  function showFinal(){
+    document.getElementById("layer3").classList.remove("active");
+    document.getElementById("layer4").classList.add("active");
+  }
+</script>
+</body>
+</html>
